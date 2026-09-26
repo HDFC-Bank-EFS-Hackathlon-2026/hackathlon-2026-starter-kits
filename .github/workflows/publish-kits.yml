@@ -19,7 +19,7 @@ jobs:
 
       - name: Download validated participant artifact
         env:
-          ARTIFACT_URL: "https://sdmntprcentralindia.oaiusercontent.com/files/00000000-9ed8-8208-bdf1-08cae885a4b8/raw?se=2026-09-26T01%3A01%3A47Z&sp=r&sv=2026-02-06&sr=b&scid=7fde05b1-e570-53ca-bdbb-e1cf9451ce87&skoid=37f774a3-b6f2-4e56-9fdd-339e5d6e97f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-25T19%3A44%3A18Z&ske=2026-09-26T19%3A44%3A18Z&sks=b&skv=2026-02-06&sig=lBZ/wTF0AnkNmdd1fJekM8O6IlAAGp1eq2%2B/8HlBaQM%3D"
+          ARTIFACT_URL: "https://sdmntprindiasocentral.oaiusercontent.com/files/00000000-3550-8211-94cb-91f0e177042c/raw?se=2026-09-26T01%3A40%3A38Z&sp=r&sv=2026-02-06&sr=b&scid=feebec17-3e7d-5e49-96be-c792d6969f3a&skoid=37f774a3-b6f2-4e56-9fdd-339e5d6e97f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-25T19%3A35%3A15Z&ske=2026-09-26T19%3A35%3A15Z&sks=b&skv=2026-02-06&sig=fzdJ5T00MTJ67BgRu%2BCa0HyBMV%2Buo3CjLSSVuT24/Qg%3D"
         run: |
           curl -fL "$ARTIFACT_URL" -o /tmp/hackathlon-kits.zip
           unzip -q /tmp/hackathlon-kits.zip -d /tmp/hackathlon-kits
