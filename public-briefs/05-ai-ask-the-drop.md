@@ -3,7 +3,7 @@
 **Stack:** Python 3.11+ (stdlib is enough). pandas, scikit-learn, or an API-backed assistant
 are fine. `make check` must pass **offline** — no network, no API keys.
 **Sprint time:** 120–150 minutes (90 if the event is 2 hours).
-**Tools:** AI assistants are allowed. You will defend the result live. A sealed constraint is released at 0:15.
+**Tools:** AI chatbots such as ChatGPT may be used only for assistance. Automated AI agents, autonomous systems, IDE-integrated AI chatbots/agents, and tools that generate substantial or complete solution code are restricted. You must be able to explain and modify your work live. A sealed constraint is released at 0:15.
 **Kit:** a launch-day event log, a question file, a labeled train set, and a short policy note.
 There is no live model and no Reservation API in this zip.
 

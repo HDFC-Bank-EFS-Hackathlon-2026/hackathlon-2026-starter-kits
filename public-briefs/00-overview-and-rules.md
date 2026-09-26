@@ -11,9 +11,10 @@ Your job depends on your track — but every track is judged on the same three t
 2. **Craft** — is the code/test/config clear, structured, and something a teammate could change?
 3. **Judgment** — did you make sensible trade-offs, and can you change the behaviour when the constraint changes?
 
-AI assistants and “vibe coding” are allowed and expected. The automated gate and a live defense
-are the assessment. If you cannot change the behaviour when the judge changes the constraint,
-the submission does not pass.
+AI chatbots such as ChatGPT may be used only for assistance, explanation, debugging guidance, and review.
+Automated AI agents, autonomous systems, IDE-integrated AI chatbots/agents, and tools that generate
+substantial or complete solution code are restricted. You must be able to explain and modify your
+implementation during the live defense.
 
 ---
 
@@ -51,15 +52,18 @@ You receive **only your track’s kit**. It does not contain other tracks’ sol
 
 ## The starter kit
 
-Everything runs with one command. You received pre-check instructions 48 hours ago; if your
-machine cannot boot the kit, use the cloud dev-environment link from the kickoff slide.
+Download **only your assigned track archive** from the official public starter-kit repository,
+extract it locally, and work inside that folder. Do not fork or publish the kit to a public repository.
+
+Typical commands are:
 
 ```
-git clone <starter-kit-url> && cd starter-kit
-make up          # starts everything below
-make check       # runs the automated invariant suite (used at freeze)
-make authority MODE=down   # toggle the central authority (see modes below)
+make up
+make check
+make authority MODE=down   # where applicable; see your track brief
 ```
+
+Track-specific README files take precedence for exact commands.
 
 What comes up:
 
@@ -147,34 +151,53 @@ the authority and compensated.
 
 1. Work individually. You may talk to mentors and other participants, but submit your own work.
    Another person may not drive your session.
-2. You may use any libraries, AI assistants, or documentation. Vibe coding is allowed. You own
-   every line you submit. If you cannot explain or change it, it does not count.
+2. You may use documentation and normal development libraries/tools. AI chatbots such as ChatGPT
+   may be used only for assistance. Automated AI agents, autonomous systems, IDE-integrated AI
+   chatbots/agents, and tools that generate substantial or complete solution code are restricted
+   and may result in disqualification. You must be able to explain and modify your work live.
 3. Do not modify the Central Authority mock or the automated check runner. Everything else in your
    track’s kit is yours.
 4. Do not upload the starter kit to a public repository or a public assistant project. Private
    local tools are fine.
 5. Submissions must run with `make up` and `make check` on a clean kit. If it does not run, it
    is not judged.
-6. Submission freeze is hard. Push before 2:30 or it does not count.
+6. Submission freeze is hard. Your files must be received through the official submission channel
+   before the cutoff; the organizer's receipt timestamp is authoritative.
 7. Respect the code of conduct. Be kind; help people boot their kit.
 
 ---
 
 ## Submission
 
-Push a branch named `submission/<your-handle>` to your fork containing:
+No GitHub account is required for participants.
 
-1. Your code / tests / config changes.
-2. `SUBMISSION.md` with **exactly six lines**:
+Before the submission freeze:
+
+1. Finish `SUBMISSION.md` with **exactly six lines**:
    - What you changed.
    - How to see it work (one command or one tap sequence).
    - What you would do next with one more week.
    - One risk or weakness you see in your own solution.
    - One thing in the starter kit you would fix if you owned it.
-   - **What the assistant got wrong, and how you caught it** (write “I did not use an assistant”
-     only if that is true).
+   - If you used permitted chatbot assistance, one thing it got wrong and how you caught it;
+     otherwise write **I did not use an assistant**.
+2. Run the track's required `make check` command.
+3. Make a final local Git commit:
+   ```
+   git add .
+   git commit -m "FINAL SUBMISSION"
+   git rev-parse HEAD > FINAL_COMMIT.txt
+   ```
+4. Create a Git bundle and a ZIP using your Participant ID and track:
+   ```
+   git bundle create <ParticipantId>-<track>.bundle --all
+   ```
+   Create `<ParticipantId>-<track>.zip` containing your completed solution, `SUBMISSION.md`,
+   and `FINAL_COMMIT.txt`.
+5. Upload both the `.zip` and `.bundle` to the **official submission channel announced by the organizers**
+   before the freeze.
 
-The six lines matter. They are read by every judge.
+The uploaded artifacts and organizer receipt timestamp constitute the official submission.
 
 ---
 
@@ -183,7 +206,7 @@ The six lines matter. They are read by every judge.
 | Weight | Component | How |
 |---|---|---|
 | 60% | **Automated gate** | `make check` invariant suite, build/test pass, and track-specific automated checks. Runs during the freeze. |
-| 40% | **Live defense** | Six lines, then 4 minutes: the judge toggles an authority mode and asks one mutation. Scored on Correctness · Craft · Judgment. Using an assistant is not a penalty. Being unable to change the result is. |
+| 40% | **Live defense** | Six lines, then 4 minutes: the judge toggles an authority mode and asks one mutation. Scored on Correctness · Craft · Judgment. Permitted chatbot assistance is not a penalty; prohibited automation is handled under the event rules. |
 
 Defense runs in parallel rooms, one per track. Senior rating additionally requires **one stretch
 goal** (or a sealed-constraint solution that is clearly above the core bar).

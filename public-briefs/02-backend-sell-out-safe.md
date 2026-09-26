@@ -2,7 +2,7 @@
 
 **Stack:** Go, Java (21+), or Kotlin — your kit ships all three.
 **Sprint time:** 120–150 minutes (90 if the event is 2 hours).
-**Tools:** AI assistants are allowed. You will defend the result live. A sealed constraint is released at 0:15.
+**Tools:** AI chatbots such as ChatGPT may be used only for assistance. Automated AI agents, autonomous systems, IDE-integrated AI chatbots/agents, and tools that generate substantial or complete solution code are restricted. You must be able to explain and modify your work live. A sealed constraint is released at 0:15.
 **Kit:** you receive only the student API and the authority. There is no reference implementation in your tree.
 
 ---
