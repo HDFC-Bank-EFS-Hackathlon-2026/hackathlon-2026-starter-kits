@@ -1,0 +1,44 @@
+name: Publish participant kits
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-kits.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout public starter-kit repo
+        uses: actions/checkout@v4
+
+      - name: Download validated participant artifact
+        env:
+          ARTIFACT_URL: "https://sdmntprcentralindia.oaiusercontent.com/files/00000000-9ed8-8208-bdf1-08cae885a4b8/raw?se=2026-09-26T01%3A01%3A47Z&sp=r&sv=2026-02-06&sr=b&scid=7fde05b1-e570-53ca-bdbb-e1cf9451ce87&skoid=37f774a3-b6f2-4e56-9fdd-339e5d6e97f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-25T19%3A44%3A18Z&ske=2026-09-26T19%3A44%3A18Z&sks=b&skv=2026-02-06&sig=lBZ/wTF0AnkNmdd1fJekM8O6IlAAGp1eq2%2B/8HlBaQM%3D"
+        run: |
+          curl -fL "$ARTIFACT_URL" -o /tmp/hackathlon-kits.zip
+          unzip -q /tmp/hackathlon-kits.zip -d /tmp/hackathlon-kits
+
+      - name: Publish participant-safe files
+        run: |
+          rm -rf kits public-briefs
+          cp -a /tmp/hackathlon-kits/kits ./kits
+          cp -a /tmp/hackathlon-kits/public-briefs ./public-briefs
+          find kits public-briefs -type f -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS.txt
+
+      - name: Commit published kits
+        run: |
+          git config user.name "HDFC Hackathlon Publisher"
+          git config user.email "actions@users.noreply.github.com"
+          git add kits public-briefs SHA256SUMS.txt
+          if git diff --cached --quiet; then
+            echo "No changes to publish"
+          else
+            git commit -m "Publish Hackathlon 2026 participant starter kits"
+            git push
+          fi
