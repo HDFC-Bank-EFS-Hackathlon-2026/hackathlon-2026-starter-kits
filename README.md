@@ -61,7 +61,10 @@ Before the freeze:
    ```bash
    git bundle create <ParticipantId>-<track>.bundle --all
    ```
-5. Create `<ParticipantId>-<track>.zip` containing your completed solution, `SUBMISSION.md`, and `FINAL_COMMIT.txt`.
+5. Create `<ParticipantId>-<track>.zip` containing your completed solution, `SUBMISSION.md`, and `FINAL_COMMIT.txt` (exclude `.git`, `__pycache__`, `.DS_Store`, and temporary test artifacts):
+   ```bash
+   zip -r <ParticipantId>-<track>.zip . -x "*.git*" "*__pycache__*" "*.DS_Store*"
+   ```
 6. Upload both the `.zip` and `.bundle` to the official submission channel announced by the organizers before the cutoff.
 
 The organizer receipt timestamp is authoritative.
@@ -70,9 +73,14 @@ The organizer receipt timestamp is authoritative.
 
 SHA-256 checksums for all published participant artifacts are in [SHA256SUMS.txt](./SHA256SUMS.txt).
 
-On Linux/macOS:
+On Linux:
 ```bash
 sha256sum -c SHA256SUMS.txt
+```
+
+On macOS (built-in):
+```bash
+shasum -a 256 -c SHA256SUMS.txt
 ```
 
 On Windows PowerShell, for a downloaded kit:
